@@ -27,7 +27,9 @@ const cleanField = (field: any): any => {
   return field;
 };
 
-async function getAllEntries(fromClient: ContentfulClientApi<undefined>) {
+async function getAllEntries(
+  fromClient: ContentfulClientApi<undefined> | Environment
+) {
   const allEntries: any[] = [];
   let skip = 0;
   const limit = 100;
@@ -88,8 +90,8 @@ const publishContent = async (toSpaceManager: Environment) => {
   console.log("Publishing content...");
 
   // Fetch all entries from the target space
-  const entries = await toSpaceManager.getEntries();
-  for (const entry of entries.items) {
+  const entries = await getAllEntries(toSpaceManager);
+  for (const entry of entries) {
     try {
       // Publish each entry
       await toSpaceManager.getEntry(entry.sys.id).then((entryToPublish) => {
