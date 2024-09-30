@@ -27,6 +27,29 @@ const cleanField = (field: any): any => {
   return field;
 };
 
+async function getAllEntries(fromClient: ContentfulClientApi<undefined>) {
+  const allEntries: any[] = [];
+  let skip = 0;
+  const limit = 100;
+  let hasMore = true;
+
+  while (hasMore) {
+    const response = await fromClient.getEntries({
+      skip,
+      limit,
+    });
+
+    if (response && response.items.length > 0) {
+      allEntries.push(...response.items);
+      skip += limit;
+    } else {
+      hasMore = false;
+    }
+  }
+  console.log(`Fetched ${allEntries.length} contents.`);
+  return allEntries;
+}
+
 export const cloneContent = async (
   fromClient: ContentfulClientApi<undefined>,
   toSpaceManager: Environment
@@ -34,8 +57,8 @@ export const cloneContent = async (
   console.log("Copying content...");
 
   // Copy Entries
-  const entries = await fromClient.getEntries();
-  for (const entry of entries.items) {
+  const entries = await getAllEntries(fromClient);
+  for (const entry of entries) {
     try {
       // Prepare the fields object with locale
       const fieldsWithLocale = Object.keys(entry.fields).reduce((acc, key) => {
