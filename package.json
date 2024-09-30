@@ -1,0 +1,36 @@
+{
+  "name": "contentful-clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "ts-node ./src/index.ts --from-space-id \"6qv0pxcm4eon\" --from-space-api-key \"ZPK2KOOzu4Wa6XqCE4vi1wt2QoY0CWaXfWKD9AKWzWQ\" --to-space-id \"o9dwab06mw6e\" --to-space-api-key \"CFPAT-CHSaPYcFLtlXFY3Z4kslTyMhK4dOxwjYEXWtPRA7GhY\" --with-content",
+    "dev": "node",
+    "start:prod": "npm run build && node ./dist/src/index.js",
+    "build": "npx tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "contentful": "^11.0.3",
+    "contentful-management": "^10.46.4",
+    "dotenv": "^16.0.3",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.1",
+    "@types/yargs": "^17.0.33",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.4"
+  }
+}
