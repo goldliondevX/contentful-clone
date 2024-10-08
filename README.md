@@ -26,6 +26,9 @@ This script clones a Contentful space's models and optionally assets and content
 - **FROM_CONTENT_DELIVERY_KEY**: `string`  
   The delivery API key for the source space.
 
+- **FROM_CONTENT_MANAGE_KEY**: `string`  
+  The management API key for the source space.
+
 - **Args**: `object`
   - `with-content?`: `boolean`  
     An optional flag to clone assets and content as well as models.
@@ -48,6 +51,7 @@ This script clones a Contentful space's models and optionally assets and content
    TO_CONTENT_MANAGE_KEY=<Your target space management API key (CMA token)>
    FROM_CONTENT_SPACE_ID=<Your source space ID>
    FROM_CONTENT_DELIVERY_KEY=<Your source space delivery API key>
+   FROM_CONTENT_MANAGE_KEY=<Your source space management API key>
    ```
 
 ### **How to Obtain API Keys and Space IDs**

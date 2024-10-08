@@ -11,6 +11,7 @@ import {
   TO_CONTENT_MANAGE_KEY,
   FROM_CONTENT_SPACE_ID,
   FROM_CONTENT_DELIVERY_KEY,
+  FROM_CONTENT_MANAGE_KEY,
 } from "./config";
 
 interface Args {
@@ -31,17 +32,25 @@ const cloneSpace = async () => {
       accessToken: TO_CONTENT_MANAGE_KEY,
     });
 
+    const fromManger = contentfulManager.createClient({
+      accessToken: FROM_CONTENT_MANAGE_KEY,
+    });
+
     const fromClient = contentfulClient.createClient({
       space: FROM_CONTENT_SPACE_ID,
       accessToken: FROM_CONTENT_DELIVERY_KEY,
     });
+
+    const fromSpace = await (
+      await fromManger.getSpace(FROM_CONTENT_SPACE_ID)
+    ).getEnvironment("master");
 
     const toSpace = await (
       await toClient.getSpace(TO_CONTENT_SPACE_ID)
     ).getEnvironment("master");
 
     console.log("Successfully authenticated both spaces!");
-    await cloneModel(fromClient, toSpace);
+    await cloneModel(fromSpace, toSpace);
     if (argv["with-content"]) {
       await cloneAssets(fromClient, toSpace);
       await cloneContent(fromClient, toSpace);
