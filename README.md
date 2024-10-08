@@ -7,7 +7,7 @@ This script clones a Contentful space's models and optionally assets and content
 ## **Features**
 
 - **Model Cloning**: Copies content models from one Contentful space to another.
-- **Optional Content and Asset Cloning**: Allows cloning assets and content with the `--with-content` flag.
+- **Optional Content and Asset Cloning**: Allows cloning assets and content with the `--with-content` flag or only cloning content with the `--only-content`.
 - **Authentication**: Authenticates both source and target spaces using Contentful API keys.
 - **Error Handling**: Handles rate limits and input validation errors.
 
@@ -32,6 +32,8 @@ This script clones a Contentful space's models and optionally assets and content
 - **Args**: `object`
   - `with-content?`: `boolean`  
     An optional flag to clone assets and content as well as models.
+  - `only-content?`: `boolean`  
+    An optional flag to clone only the content and assets, excluding the models.
 
 ---
 
@@ -110,6 +112,9 @@ npm start
 - **--with-content**  
   Use this flag to clone assets and content in addition to the models.
 
+- **--only-content**  
+  Use this flag to clone only assets and content.
+
 ---
 
 ## **Examples**
@@ -124,6 +129,12 @@ npm start
 
    ```bash
    npm start --with-content
+   ```
+
+3. **Only Clone assets, and content**:
+
+   ```bash
+   npm start --only-content
    ```
 
 ---

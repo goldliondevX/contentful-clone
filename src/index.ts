@@ -16,10 +16,15 @@ import {
 
 interface Args {
   "with-content"?: boolean;
+  "only-content"?: boolean;
 }
 
 // Parse command line arguments
 const argv = yargs
+  .option("only-content", {
+    type: "boolean",
+    describe: "Only Copy content as well",
+  })
   .option("with-content", {
     type: "boolean",
     describe: "Whether to copy content as well",
@@ -50,8 +55,10 @@ const cloneSpace = async () => {
     ).getEnvironment("master");
 
     console.log("Successfully authenticated both spaces!");
-    await cloneModel(fromSpace, toSpace);
-    if (argv["with-content"]) {
+    if (!argv["only-content"]) {
+      await cloneModel(fromSpace, toSpace);
+    }
+    if (argv["only-content"] || argv["with-content"]) {
       await cloneAssets(fromClient, toSpace);
       await cloneContent(fromClient, toSpace);
     }
